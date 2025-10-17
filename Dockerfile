@@ -1,30 +1,24 @@
-#FROM maven:3.8.3-openjdk-17
-#ENV JAVA_HOME /usr/java/openjdk-17
-#RUN export JAVA_HOME
+# Etapa 1: Construcción del JAR
+FROM maven:3.9.4-eclipse-temurin-17 AS build
 
-#RUN mkdir -p /app
-#WORKDIR /app
-#COPY pom.xml /app
-#COPY src/main/resources/application.properties /app
-#COPY src /app/src
+# Crear directorio de trabajo
+WORKDIR /app
 
-#RUN mvn -f pom.xml clean package
+# Copiar archivos del proyecto
+COPY . .
 
-#RUN cp target/*.jar app.jar
-#EXPOSE 8863
+# Compilar el proyecto y generar el JAR
+RUN mvn clean package -DskipTests
 
-#ENTRYPOINT ["java","-jar","app.jar","--spring.config.location=application.properties"]
-
-# Usar una imagen base con Java
+# Etapa 2: Imagen final con el JAR
 FROM openjdk:17-jdk-slim
 
-# Directorio de trabajo dentro del contenedor
 WORKDIR /app
-RUN mvn -f pom.xml clean package
-# Copiar el archivo JAR al contenedor
-COPY target/*.jar app.jar
 
-# Exponer el puerto que usa Spring Boot (por defecto 8080)
+# Copiar el JAR desde la etapa de construcción
+COPY --from=build /app/target/*.jar app.jar
+
+# Exponer el puerto por defecto de Spring Boot
 EXPOSE 8863
 
 # Comando para ejecutar la aplicación
