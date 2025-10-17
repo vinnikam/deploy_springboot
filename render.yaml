@@ -8,15 +8,17 @@ services:
     dockerfilePath: Dockerfile
     autoDeploy: true
     envVars:
-      - key: SPRING_DATASOURCE_URL
+      - key: spring_datasource_url
         value: jdbc:postgresql://dpg-d3p2btc9c44c738khig0-a.oregon-postgres.render.com/temporaldb_fjzr
-      - key: SPRING_DATASOURCE_USERNAME
+      - key: pring_datasource_username
         value: temporaldb_fjzr_user
-      - key: SPRING_DATASOURCE_PASSWORD
+      - key: spring_datasource_password
         value: xUG989zR5PzoHJnG3H3jzTf7a1wG1G7N
-      - key: SPRING_JPA_HIBERNATE_DDL_AUTO
+      - key: spring_jpa_hibernate_ddl_auto
         value: update
-      - key: SPRING_JPA_SHOW_SQL
+      - key: spring_jpa_show_sql
         value: true
-      - key: SPRING_JPA_DATABASE_PLATFORM
+      - key: spring_jpa_database_platform
         value: org.hibernate.dialect.PostgreSQLDialect
+      - key: spring_datasource_driver_class_name
+        value: org.postgresql.Driver
