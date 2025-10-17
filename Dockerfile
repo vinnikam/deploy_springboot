@@ -20,9 +20,9 @@ FROM openjdk:17-jdk-slim
 
 # Directorio de trabajo dentro del contenedor
 WORKDIR /app
-
+RUN mvn -f pom.xml clean package
 # Copiar el archivo JAR al contenedor
-COPY target/gestion_demo.jar app.jar
+COPY target/*.jar app.jar
 
 # Exponer el puerto que usa Spring Boot (por defecto 8080)
 EXPOSE 8863
