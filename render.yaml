@@ -15,7 +15,7 @@ services:
       - key: spring_datasource_password
         value: xUG989zR5PzoHJnG3H3jzTf7a1wG1G7N
       - key: spring_jpa_hibernate_ddl_auto
-        value: drop, create
+        value: update
       - key: spring_jpa_show_sql
         value: true
       - key: spring_jpa_database_platform
